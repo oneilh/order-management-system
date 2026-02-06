@@ -1,4 +1,4 @@
 import { redirect } from "next/navigation";
 export default function Home() {
- redirect("/group_buys/active");
+ redirect("/single_buys/active");
 }
