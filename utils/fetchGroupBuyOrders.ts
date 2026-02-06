@@ -1,6 +1,9 @@
 import { ACCESS_TOKEN, BASE_URL } from "@/lib/token"
 
 export const fetchGroupBuyOrders = async (id: number) => {
+    if (!ACCESS_TOKEN) {
+    throw new Error("API_TOKEN is not defined");
+  }
   const res = await fetch(
     `${BASE_URL}/group-buy-orders/?id=${id}`,
     {

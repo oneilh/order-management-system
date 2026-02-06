@@ -3,6 +3,9 @@ import { ACCESS_TOKEN, BASE_URL } from "../lib/token";
 export type SingleBuyType = "ACTIVE" | "PAST";
 
 export async function getSingleBuys(type: SingleBuyType) {
+    if (!ACCESS_TOKEN) {
+    throw new Error("API_TOKEN is not defined");
+  }
   const res = await fetch(
     `${BASE_URL}/single-buys/?type=${type}`,
     {
