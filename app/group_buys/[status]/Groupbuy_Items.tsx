@@ -1,4 +1,5 @@
-'use client'
+"use client";
+import { useState } from "react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 
@@ -11,11 +12,14 @@ import Avatar from "@/components/Avatar";
 import Status from "@/components/Status";
 import { formatDate } from "@/utils/format_date";
 import StatusBadge from "@/components/StatusBadge";
+import Dropdown from "@/components/Dropdown";
 
 const Groupbuy_Items = ({ items }: { items: any[] }) => {
   const params = useParams();
   const status = params.status as string;
 
+  const [openId, setOpenId] = useState<string | null>(null);
+  console.log(items);
   return (
     <div className="flex flex-col gap-4 border-2 border-dashed border-black/20 p-4 rounded-xl">
       {items.map((item) => (
@@ -27,7 +31,7 @@ const Groupbuy_Items = ({ items }: { items: any[] }) => {
             {/* Left: Image + Description */}
             <section className="flex gap-4 items-center flex-1 min-w-[220px]">
               {/* image */}
-              <Avatar src={item.product.image} size="small"/>
+              <Avatar src={item.product.image} size="small" />
 
               {/* desc */}
               <section className="flex flex-col gap-2 flex-1">
@@ -36,8 +40,15 @@ const Groupbuy_Items = ({ items }: { items: any[] }) => {
                   <p className="text-sm text-neutral-500 bg-gray-100 w-fit px-1 py-0.5 rounded-sm">
                     # {item.id}
                   </p>
-                  {/* <Status status={item.group_buy_status} /> */}
-                  <StatusBadge status={item.group_buy_status} />
+
+                  {
+                    <Dropdown
+                      id={item.id}
+                      openId={openId}
+                      setOpenId={setOpenId}
+                      status={item.group_buy_status}
+                    />
+                  }
                 </div>
                 {/* duration and date created */}
                 <section className="flex gap-4 items-center text-sm">

@@ -6,7 +6,8 @@ export const ORDER_STATUSES = [
   "READY_FOR_PICKUP",
   "DELIVERED",
   "FAILED_PROCESSING",
-  "FAILED_SHIPPING",
+  // "FAILED_SHIPPING",
+  "FAILED",
   "REFUND_PENDING", // Added a clear refund status
 ] 
 export type OrderStatus = (typeof ORDER_STATUSES)[number];

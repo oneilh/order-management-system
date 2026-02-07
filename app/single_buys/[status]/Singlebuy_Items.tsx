@@ -10,11 +10,15 @@ import { formatItemCount } from "@/utils/format_item_count";
 import Avatar from "@/components/Avatar";
 import Status from "@/components/Status";
 import { formatDate } from "@/utils/format_date";
+import { useState } from "react";
+import Dropdown from "@/components/Dropdown";
 
 const Singlebuy_Items = ({ items }: { items: any[] }) => {
   const params = useParams();
   const status = params.status as string;
 
+  const [openId, setOpenId] = useState<string | null>(null);
+  console.log(items);
   return (
     <div className="flex flex-col gap-4 border-2 border-dashed border-black/20 p-4 rounded-xl">
       {items.map((item) => (
@@ -34,7 +38,12 @@ const Singlebuy_Items = ({ items }: { items: any[] }) => {
                   <p className="text-sm text-neutral-500 bg-gray-100 w-fit px-1 py-0.5 rounded-sm">
                     # {item.order_id}
                   </p>
-                  <Status status={item.single_buy_status} />
+                     <Dropdown
+                      id={item.id}
+                      openId={openId}
+                      setOpenId={setOpenId}
+                      status={item.single_buy_status}
+                    />
                 </div>
                 {/* quantity/unit and date created */}
                 <section className="flex gap-4 items-center text-sm">
