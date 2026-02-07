@@ -10,6 +10,7 @@ import { formatItemCount } from "@/utils/format_item_count";
 import Avatar from "@/components/Avatar";
 import Status from "@/components/Status";
 import { formatDate } from "@/utils/format_date";
+import StatusBadge from "@/components/StatusBadge";
 
 const Groupbuy_Items = ({ items }: { items: any[] }) => {
   const params = useParams();
@@ -35,7 +36,8 @@ const Groupbuy_Items = ({ items }: { items: any[] }) => {
                   <p className="text-sm text-neutral-500 bg-gray-100 w-fit px-1 py-0.5 rounded-sm">
                     # {item.id}
                   </p>
-                  <Status status={item.group_buy_status} />
+                  {/* <Status status={item.group_buy_status} /> */}
+                  <StatusBadge status={item.group_buy_status} />
                 </div>
                 {/* duration and date created */}
                 <section className="flex gap-4 items-center text-sm">

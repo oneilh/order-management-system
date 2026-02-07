@@ -31,12 +31,18 @@ export default function BadgeDropdown({
   const [isOpen, setIsOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  const formatText = (text: string) => 
-    text.toLowerCase().replace(/_/g, " ").replace(/\b\w/g, (l) => l.toUpperCase());
+  const formatText = (text: string) =>
+    text
+      .toLowerCase()
+      .replace(/_/g, " ")
+      .replace(/\b\w/g, (l) => l.toUpperCase());
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
+      if (
+        containerRef.current &&
+        !containerRef.current.contains(event.target as Node)
+      ) {
         setIsOpen(false);
       }
     };
@@ -60,7 +66,9 @@ export default function BadgeDropdown({
         className={`flex items-center gap-2 px-3 py-1 rounded-md border text-[11px] font-black tracking-tight transition-all ${currentStyle} hover:brightness-95 active:scale-95`}
       >
         <span>{formatText(selected)}</span>
-        <FaChevronDown className={`w-3 h-3 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`} />
+        <FaChevronDown
+          className={`w-3 h-3 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`}
+        />
       </button>
 
       {isOpen && (
@@ -76,8 +84,16 @@ export default function BadgeDropdown({
                   onClick={() => handleSelect(status)}
                   className={`flex w-full items-center justify-between px-3 py-2 text-sm rounded-lg transition-all ${status === selected ? "bg-slate-100 text-slate-900" : "text-slate-600 hover:bg-slate-50"}`}
                 >
-                  <span className={status === selected ? "font-bold" : "font-medium"}>{formatText(status)}</span>
-                  <div className={`w-2 h-2 rounded-full border ${statusStyles[status]?.split(' ')[0] || 'bg-slate-200'}`} />
+                  <span
+                    className={
+                      status === selected ? "font-bold" : "font-medium"
+                    }
+                  >
+                    {formatText(status)}
+                  </span>
+                  <div
+                    className={`w-2 h-2 rounded-full border ${statusStyles[status]?.split(" ")[0] || "bg-slate-200"}`}
+                  />
                 </button>
               ))}
             </div>

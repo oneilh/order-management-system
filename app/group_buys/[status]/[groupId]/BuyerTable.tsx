@@ -1,17 +1,19 @@
-'use client'
+"use client";
 import { formatDate } from "@/utils/format_date";
 import { buyercol } from "./BuyerTableCol";
 import BadgeDropdown from "@/components/BadgeDropdown";
 import { ORDER_STATUSES } from "@/utils/orderStatuses";
 import { useState } from "react";
+import Badge from "@/components/Badge";
+import Checkbox from "@/components/Checkbox";
 
 type Props = {
   dataRows: any[];
 };
 
 const BuyerTable = ({ dataRows }: Props) => {
-    const [orderStatus, setOrderStatus] = useState(ORDER_STATUSES[0]);
-
+  const [orderStatus, setOrderStatus] = useState(ORDER_STATUSES[0]);
+  console.log(dataRows);
   return (
     <div className="overflow-x-auto">
       <table className="table">
@@ -36,16 +38,18 @@ const BuyerTable = ({ dataRows }: Props) => {
               <td>{Number(data.unit)}</td>
               <td>&#x20A6;{Number(data.total_price)}</td>
               <td>{formatDate(data.created_at)}</td>
+              <td><Badge status={data.status_display_text}/></td>
               <td>
-                {
+                {/* {
                   <BadgeDropdown
-                    values={ORDER_STATUSES} 
-                    defaultValue={orderStatus} 
-                    onChange={(val:string) => setOrderStatus(val)}
+                    values={ORDER_STATUSES}
+                    defaultValue={orderStatus}
+                    onChange={(val: string) => setOrderStatus(val)}
                   />
-                }
+                } */}
+               <Checkbox status={data.status_display_text}/>
               </td>
-               <td>{data.order_id}</td>
+              <td>{data.order_id}</td>
             </tr>
           ))}
         </tbody>
